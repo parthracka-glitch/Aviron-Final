@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>AVIRON — Digital Studio · Strategy, Design & Digital</title>
+  <meta name="description" content="AVIRON is an independent digital studio creating websites, video editing, and visual imagery that help good businesses look as exceptional as they are.">
+  <meta name="keywords" content="digital studio, website development, video editing, photo editing, 3D web design, creative agency, branding">
+  <meta name="theme-color" content="#080b08">
+
+  <!-- Favicon / Brand Symbol -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23080b08%22/><text y=%2268%22 x=%2220%22 font-size=%2265%22 font-family=%22sans-serif%22 font-weight=%22bold%22 fill=%22%23c4a96a%22>A•</text></svg>">
+
+  <!-- Google Fonts: Cormorant Garamond, Manrope & DM Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400;1,600;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+
+  <!-- Core Stylesheets -->
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/hero.css">
+  <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/animations.css">
+
+  <!-- Three.js ES Module Importmap -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.min.js"
+    }
+  }
+  </script>
+
+  <!-- External Libraries (GSAP, ScrollTrigger, Lenis) -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+</head>
+<body>
+
+  <!-- 3D Interactive Background Canvas -->
+  <canvas id="webgl-canvas" aria-hidden="true"></canvas>
+
+  <!-- Tactile Morphism Grain Overlay -->
+  <div class="noise-overlay" aria-hidden="true"></div>
+
+  <!-- Custom Minimalist Cursor Follower -->
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"><span class="cursor-label"></span></div>
+
+  <!-- 0. PRELOADER -->
+  <aside class="preloader" aria-label="Loading AVIRON Studio Experience">
+    <button class="preloader-skip" type="button" aria-label="Skip preloader animation">Skip Intro [Esc]</button>
+    <div class="preloader-center">
+      <!-- Geometric Asterisk / Wireframe Icon -->
+      <svg class="preloader-icon" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+        <circle cx="50" cy="50" r="42" stroke="var(--line)" />
+        <line x1="50" y1="12" x2="50" y2="88" stroke="var(--gold)" />
+        <line x1="17" y1="31" x2="83" y2="69" stroke="var(--gold)" />
+        <line x1="17" y1="69" x2="83" y2="31" stroke="var(--gold)" />
+        <polygon points="50,18 78,34 78,66 50,82 22,66 22,34" stroke="var(--scene-wire)" stroke-width="1.5" stroke-dasharray="3 3"/>
+      </svg>
+      <div class="preloader-word" aria-label="AVIRON">
+        <span class="p-char">A</span>
+        <span class="p-char">V</span>
+        <span class="p-char">I</span>
+        <span class="p-char">R</span>
+        <span class="p-char">O</span>
+        <span class="p-char">N</span>
+      </div>
+      <div class="preloader-subtitle">Digital Studio</div>
+    </div>
+  </aside>
+
+  <!-- Main Website Shell -->
+  <div class="site-wrapper">
+
+    <!-- 1. ANNOUNCEMENT BAR -->
+    <aside class="announcement">
+      <span class="announcement-dot" aria-hidden="true"></span>
+      <span>Independent creative studio for ambitious brands</span>
+      <a href="#contact">Let's create something →</a>
+    </aside>
+
+    <!-- 2. STICKY GLASS HEADER -->
+    <header class="site-header" id="site-header">
+      <div class="header-container">
+        <!-- Brand Mark -->
+        <a href="#hero" class="header-brand" aria-label="AVIRON Studio Home">
+          <div class="brand-symbol">A•</div>
+          <div class="brand-text">
+            <span class="brand-name">AVIRON</span>
+            <span class="brand-sub">Digital Studio</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="nav-menu" aria-label="Primary Navigation">
+          <a href="#about" class="nav-link">About</a>
+          <a href="#services" class="nav-link">Services</a>
+          <a href="#work" class="nav-link">Selected Work</a>
+          <a href="#pricing" class="nav-link">Packages</a>
+          <a href="#contact" class="nav-link">Contact</a>
+        </nav>
+
+        <!-- Header Actions -->
+        <div class="header-actions">
+          <a href="#contact" class="btn-header-cta">Start a project ↗</a>
+          <!-- Mobile Hamburger Toggle -->
+          <button class="mobile-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
+            <span class="toggle-line"></span>
+            <span class="toggle-line"></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Scroll Progress Bar -->
+      <div class="scroll-progress" aria-hidden="true"></div>
+    </header>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-nav" aria-label="Mobile Navigation Drawer">
+      <div class="mobile-nav-links">
+        <a href="#about" class="mobile-nav-link">About <span>01</span></a>
+        <a href="#services" class="mobile-nav-link">Services <span>02</span></a>
+        <a href="#work" class="mobile-nav-link">Selected Work <span>03</span></a>
+        <a href="#process" class="mobile-nav-link">Process <span>04</span></a>
+        <a href="#pricing" class="mobile-nav-link">Packages <span>05</span></a>
+        <a href="#contact" class="mobile-nav-link">Contact <span>06</span></a>
+      </div>
+      <div class="mobile-nav-footer">
+        <a href="#contact" class="btn-primary" style="text-align: center;">Start a project ↗</a>
+        <p class="brand-sub" style="font-size: 10px; color: var(--muted); text-align: center;">Thoughtfully crafted. Intentionally different.</p>
+      </div>
+    </div>
+
+    <main>
+      <!-- 3. HERO SECTION -->
+      <section class="hero-section" id="hero" aria-label="Hero Section">
+        <div class="section-shell hero-shell">
+          <div class="hero-content">
+            <!-- Subtle Understated Eyebrow -->
+            <div class="hero-eyebrow-wrap">
+              <span class="hero-eyebrow">AVIRON · INDEPENDENT DIGITAL STUDIO</span>
+            </div>
+
+            <!-- High-Impact Single Masthead Headline -->
+            <h1 class="hero-title">
+              <span class="title-line">
+                <span class="title-word"><span class="char">C</span><span class="char">r</span><span class="char">a</span><span class="char">f</span><span class="char">t</span><span class="char">i</span><span class="char">n</span><span class="char">g</span></span>
+                <span class="title-word"><span class="char">D</span><span class="char">i</span><span class="char">g</span><span class="char">i</span><span class="char">t</span><span class="char">a</span><span class="char">l</span></span>
+                <span class="title-word"><span class="char">P</span><span class="char">r</span><span class="char">e</span><span class="char">s</span><span class="char">e</span><span class="char">n</span><span class="char">c</span><span class="char">e</span></span>
+              </span>
+              <span class="title-line">
+                <span class="title-word"><span class="char">T</span><span class="char">h</span><span class="char">a</span><span class="char">t</span></span>
+                <span class="title-word"><span class="char">R</span><span class="char">e</span><span class="char">f</span><span class="char">u</span><span class="char">s</span><span class="char">e</span><span class="char">s</span></span>
+                <span class="title-word"><span class="char">t</span><span class="char">o</span></span>
+                <span class="title-word"><span class="char">B</span><span class="char">e</span></span>
+                <span class="title-word"><em class="title-highlight">Forgotten.</em></span>
+              </span>
+            </h1>
+
+            <!-- Concise Refined Value Proposition Lede -->
+            <p class="hero-lede">
+              We engineer high-impact 3D websites, cinematic visuals, and bespoke digital platforms that turn curious visitors into devoted clients.
+            </p>
+
+            <!-- Clean Minimal Call-To-Action Buttons -->
+            <div class="hero-actions">
+              <a href="#work" class="btn-primary">
+                <span>Explore our work</span>
+                <span class="btn-arrow" aria-hidden="true">↘</span>
+              </a>
+              <a href="#contact" class="btn-secondary">
+                <span>Start a project</span>
+                <span class="btn-arrow" aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Pure Uncluttered Space for 3D Centerpiece on Desktop -->
+          <div class="hero-stage-spacer" aria-hidden="true"></div>
+        </div>
+
+        <!-- Simple Quiet Scroll Indicator -->
+        <a href="#about" class="hero-scroll-indicator" aria-label="Scroll to explore">
+          <span class="scroll-indicator-text">SCROLL</span>
+          <span class="scroll-indicator-arrow" aria-hidden="true">↓</span>
+        </a>
+      </section>
+
+      <!-- 4. MARQUEE STRIP -->
+      <section class="marquee-section" aria-hidden="true">
+        <div class="marquee-track">
+          <div class="marquee-item">WEB DESIGN <span class="marquee-star">✳</span></div>
+          <div class="marquee-item">VIDEO EDITING <span class="marquee-star">✳</span></div>
+          <div class="marquee-item">PHOTO RETOUCHING <span class="marquee-star">✳</span></div>
+          <div class="marquee-item">BRAND EXPERIENCES <span class="marquee-star">✳</span></div>
+          <div class="marquee-item">WEB DESIGN <span class="marquee-star">✳</span></div>
+          <div class="marquee-item">VIDEO EDITING <span class="marquee-star">✳</span></div>
+          <div class="marquee-item">PHOTO RETOUCHING <span class="marquee-star">✳</span></div>
+          <div class="marquee-item">BRAND EXPERIENCES <span class="marquee-star">✳</span></div>
+          <div class="marquee-item">WEB DESIGN <span class="marquee-star">✳</span></div>
+          <div class="marquee-item">VIDEO EDITING <span class="marquee-star">✳</span></div>
+          <div class="marquee-item">PHOTO RETOUCHING <span class="marquee-star">✳</span></div>
+          <div class="marquee-item">BRAND EXPERIENCES <span class="marquee-star">✳</span></div>
+        </div>
+      </section>
+
+      <!-- 5. ABOUT SECTION -->
+      <section class="site-section about-section" id="about">
+        <div class="section-shell">
+          <div class="about-header-grid reveal">
+            <!-- Col 1: Kicker -->
+            <div class="about-kicker-col">
+              <span class="section-kicker">01 / ABOUT US</span>
+            </div>
+
+            <!-- Col 2: Big H2 + Copy -->
+            <div class="about-title-col">
+              <h2 class="about-title">
+                Good design isn't decoration. It's <em>how people remember you.</em>
+              </h2>
+              <p class="about-body-text">
+                AVIRON is a creative digital studio for businesses ready to show up with clarity and confidence. We bring strategy, design, and craft together to make every digital touchpoint feel considered.
+              </p>
+              <a href="#contact" class="btn-link-action">Let's talk about your vision →</a>
+            </div>
+
+            <!-- Col 3: Rotating Stamp -->
+            <div class="about-stamp-col">
+              <div class="rotating-stamp" title="AVIRON Studio Philosophy">
+                <svg class="stamp-svg" viewBox="0 0 140 140">
+                  <path id="stamp-circle" d="M 70, 70 m -50, 0 a 50,50 0 1,1 100,0 a 50,50 0 1,1 -100,0" fill="none" />
+                  <text>
+                    <textPath href="#stamp-circle" startOffset="0%">
+                      THOUGHTFUL BY DESIGN ✳ THOUGHTFUL BY DESIGN ✳
+                    </textPath>
+                  </text>
+                </svg>
+                <div class="stamp-center-icon">↗</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Studio Pillars -->
+          <div class="about-pillars reveal">
+            <div class="pillar-item">
+              <span class="pillar-num">01 / STRATEGY</span>
+              <h3 class="pillar-title">Positioning & Intent</h3>
+              <p class="pillar-desc">We begin with clear-eyed market perspective, defining the emotional tone and structural foundation before a single layout is drawn.</p>
+            </div>
+            <div class="pillar-item">
+              <span class="pillar-num">02 / CRAFT</span>
+              <h3 class="pillar-title">Meticulous Polish</h3>
+              <p class="pillar-desc">Typographic discipline, intentional spacing, and tactile micro-interactions that leave a resonant, lasting impression on visitors.</p>
+            </div>
+            <div class="pillar-item">
+              <span class="pillar-num">03 / PERFORMANCE</span>
+              <h3 class="pillar-title">Technical Rigor</h3>
+              <p class="pillar-desc">Lightweight engineering, responsive mobile behavior, accessible semantics, and conversion paths designed for quantifiable growth.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. SERVICES SECTION -->
+      <section class="site-section services-section" id="services">
+        <div class="section-shell">
+          <div class="section-head reveal">
+            <span class="section-kicker">02 / WHAT WE DO</span>
+            <h2 class="section-head-title">One studio. <em>Three ways to grow.</em></h2>
+            <p class="section-head-sub">We combine brand narrative with technical capability to build digital experiences that drive genuine commercial confidence.</p>
+          </div>
+
+          <div class="services-grid">
+            <!-- Service 1: Website Development -->
+            <article class="service-card reveal">
+              <div class="service-card-top">
+                <span class="service-index">01 / DIGITAL PLATFORMS</span>
+                <h3 class="service-title">Website development</h3>
+                <p class="service-desc">Responsive, considered websites that turn first visits into meaningful enquiries.</p>
+                <div class="service-image-wrap">
+                  <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80" 
+                       alt="Laptop showing minimalist web development code" 
+                       class="service-image" 
+                       loading="lazy" />
+                </div>
+                <div class="service-features-list">
+                  <div class="service-feature-item">
+                    <span class="feature-dot"></span>
+                    <span>Business & portfolio websites</span>
+                  </div>
+                  <div class="service-feature-item">
+                    <span class="feature-dot"></span>
+                    <span>E-commerce experiences</span>
+                  </div>
+                  <div class="service-feature-item">
+                    <span class="feature-dot"></span>
+                    <span>Custom design & development</span>
+                  </div>
+                </div>
+              </div>
+              <div class="service-card-footer">
+                <a href="#pricing" class="service-link">View packages ↗</a>
+                <span class="service-index">WEB / 01</span>
+              </div>
+            </article>
+
+            <!-- Service 2: Video Editing -->
+            <article class="service-card reveal">
+              <div class="service-card-top">
+                <span class="service-index">02 / MOTION & NARRATIVE</span>
+                <h3 class="service-title">Video editing</h3>
+                <p class="service-desc">Purposeful edits that give your story pace, feeling, and a polished finish.</p>
+                <div class="service-image-wrap">
+                  <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=800&q=80" 
+                       alt="Video editor working on cinema sequence timeline" 
+                       class="service-image" 
+                       loading="lazy" />
+                </div>
+                <div class="service-features-list">
+                  <div class="service-feature-item">
+                    <span class="feature-dot"></span>
+                    <span>Reels & short-form content</span>
+                  </div>
+                  <div class="service-feature-item">
+                    <span class="feature-dot"></span>
+                    <span>Promotional videos & brand stories</span>
+                  </div>
+                  <div class="service-feature-item">
+                    <span class="feature-dot"></span>
+                    <span>Transitions & motion graphics</span>
+                  </div>
+                </div>
+              </div>
+              <div class="service-card-footer">
+                <a href="#contact" class="service-link">Enquire motion ↗</a>
+                <span class="service-index">MOV / 02</span>
+              </div>
+            </article>
+
+            <!-- Service 3: Photo Editing -->
+            <article class="service-card reveal">
+              <div class="service-card-top">
+                <span class="service-index">03 / VISUAL RETOUCHING</span>
+                <h3 class="service-title">Photo editing</h3>
+                <p class="service-desc">Clean, cohesive imagery that makes products, spaces, and people shine.</p>
+                <div class="service-image-wrap">
+                  <img src="https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&w=800&q=80" 
+                       alt="Designer working on high-fidelity color grading" 
+                       class="service-image" 
+                       loading="lazy" />
+                </div>
+                <div class="service-features-list">
+                  <div class="service-feature-item">
+                    <span class="feature-dot"></span>
+                    <span>Colour correction & retouching</span>
+                  </div>
+                  <div class="service-feature-item">
+                    <span class="feature-dot"></span>
+                    <span>Product & property imagery</span>
+                  </div>
+                  <div class="service-feature-item">
+                    <span class="feature-dot"></span>
+                    <span>Social-ready image sets</span>
+                  </div>
+                </div>
+              </div>
+              <div class="service-card-footer">
+                <a href="#contact" class="service-link">Enquire imagery ↗</a>
+                <span class="service-index">IMG / 03</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. SELECTED WORK SECTION (PINNED HORIZONTAL ON DESKTOP) -->
+      <section class="site-section work-section" id="work">
+        <div class="section-shell">
+          <div class="work-header-wrap reveal">
+            <span class="section-kicker">03 / SELECTED WORK</span>
+            <h2 class="section-head-title">Made to make <em>an impression.</em></h2>
+          </div>
+
+          <div class="work-track-wrapper">
+            <div class="work-track">
+              <!-- Work Item 1: Still House -->
+              <article class="work-card">
+                <div class="work-image-frame">
+                  <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1400&q=85" 
+                       alt="Still House hospitality architecture case study" 
+                       class="work-image" 
+                       loading="lazy" />
+                </div>
+                <div class="work-card-info">
+                  <span class="work-category">Hospitality · Website direction</span>
+                  <div class="work-title-row">
+                    <h3 class="work-title">Still House</h3>
+                    <span class="work-arrow">↗</span>
+                  </div>
+                  <p class="work-deliverables">Brand Architecture · Digital Flagship · Spatial Art Direction</p>
+                </div>
+              </article>
+
+              <!-- Work Item 2: Forma Wellness -->
+              <article class="work-card">
+                <div class="work-image-frame">
+                  <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1000&q=85" 
+                       alt="Forma Wellness serene spa visual direction" 
+                       class="work-image" 
+                       loading="lazy" />
+                </div>
+                <div class="work-card-info">
+                  <span class="work-category">Wellness · Visual direction</span>
+                  <div class="work-title-row">
+                    <h3 class="work-title">Forma Wellness</h3>
+                    <span class="work-arrow">↗</span>
+                  </div>
+                  <p class="work-deliverables">Identity System · Motion Content · Interactive Booking</p>
+                </div>
+              </article>
+
+              <!-- Work Item 3: Élan Objects -->
+              <article class="work-card">
+                <div class="work-image-frame">
+                  <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1000&q=85" 
+                       alt="Élan Objects curated luxury retail campaign" 
+                       class="work-image" 
+                       loading="lazy" />
+                </div>
+                <div class="work-card-info">
+                  <span class="work-category">Retail · Campaign imagery</span>
+                  <div class="work-title-row">
+                    <h3 class="work-title">Élan Objects</h3>
+                    <span class="work-arrow">↗</span>
+                  </div>
+                  <p class="work-deliverables">E-Commerce Experience · Product Retouching · Social Sets</p>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <!-- Work Note Banner -->
+          <div class="work-footer-note reveal">
+            <span class="work-note-text">✳ Your project could be the next story here.</span>
+            <a href="#contact" class="work-note-cta">Let's talk about it ↗</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8. PROCESS SECTION -->
+      <section class="site-section process-section" id="process">
+        <div class="section-shell">
+          <div class="section-head reveal">
+            <span class="section-kicker">04 / THE PROCESS</span>
+            <h2 class="section-head-title">Clear steps. <em>Thoughtful results.</em></h2>
+            <p class="section-head-sub">Every deliverable progresses through a disciplined four-stage pipeline engineered to balance velocity with uncompromising craft.</p>
+          </div>
+
+          <div class="process-layout">
+            <!-- Vertical Line Spine with GSAP Scrub -->
+            <div class="process-timeline-spine">
+              <div class="process-line-fill"></div>
+            </div>
+
+            <div class="process-list">
+              <!-- Step 01 -->
+              <div class="process-row reveal">
+                <div class="process-step-num">01</div>
+                <h3 class="process-step-name">Discover</h3>
+                <p class="process-step-desc">We listen deeply to understand your business model, customer desires, market competition, and core objectives before touching any tools.</p>
+              </div>
+
+              <!-- Step 02 -->
+              <div class="process-row reveal">
+                <div class="process-step-num">02</div>
+                <h3 class="process-step-name">Define</h3>
+                <p class="process-step-desc">We outline the creative direction, wireframe information hierarchies, and establish content requirements so expectations are crystalline.</p>
+              </div>
+
+              <!-- Step 03 -->
+              <div class="process-row reveal">
+                <div class="process-step-num">03</div>
+                <h3 class="process-step-name">Create</h3>
+                <p class="process-step-desc">High-craft design, production, and clean development converge. We iterate in close dialogue with live previews and tactile feedback.</p>
+              </div>
+
+              <!-- Step 04 -->
+              <div class="process-row reveal">
+                <div class="process-step-num">04</div>
+                <h3 class="process-step-name">Deliver</h3>
+                <p class="process-step-desc">Rigorous speed optimization, SSL and responsive testing, Google Business and analytics configuration, followed by seamless deployment.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 9. PRICING SECTION (REAL INR DATA) -->
+      <section class="site-section pricing-section" id="pricing">
+        <div class="section-shell">
+          <div class="section-head reveal">
+            <span class="section-kicker">05 / PACKAGES</span>
+            <h2 class="section-head-title">Right-sized for <em>your next move.</em></h2>
+            <p class="section-head-sub">Every project is different. These starting points help us find the right scope together.</p>
+          </div>
+
+          <!-- 3 Package Cards -->
+          <div class="pricing-cards-grid">
+            <!-- Card 1: Standard -->
+            <article class="pricing-card reveal">
+              <div class="pricing-card-header">
+                <div class="package-label">01 / ESSENTIAL</div>
+                <h3 class="package-title">Standard</h3>
+                <div class="package-price-wrap">
+                  <span class="package-price">₹14,999</span>
+                </div>
+                <div class="package-timeline-badge">
+                  <span>⏱ 7 days delivery</span>
+                  <span>·</span>
+                  <span>2 revision rounds</span>
+                </div>
+              </div>
+
+              <div class="pricing-divider"></div>
+
+              <ul class="package-features">
+                <li class="package-feature">
+                  <span class="check-icon">✓</span>
+                  <span>5–7 custom responsive pages</span>
+                </li>
+                <li class="package-feature">
+                  <span class="check-icon">✓</span>
+                  <span>Responsive design, SSL/HTTPS & speed optimisation</span>
+                </li>
+                <li class="package-feature">
+                  <span class="check-icon">✓</span>
+                  <span>Direct Call / WhatsApp buttons, map & social links</span>
+                </li>
+                <li class="package-feature">
+                  <span class="check-icon">✓</span>
+                  <span>Enquiry form with instant email alerts</span>
+                </li>
+                <li class="package-feature">
+                  <span class="check-icon">✓</span>
+                  <span>Basic SEO & Google Business Profile setup</span>
+                </li>
+                <li class="package-feature">
+                  <span class="check-icon">✓</span>
+                  <span>Customer reviews & testimonials module</span>
+                </li>
+                <li class="package-feature">
+                  <span class="check-icon">✓</span>
+                  <span>Domain + hosting first year included</span>
+                </li>
+              </ul>
+
+              <a href="#contact" class="btn-pricing" data-package="Standard (₹14,999)">Discuss Standard ↗</a>
+            </article>
+
+            <!-- Card 2: Advanced (FEATURED) -->
+            <article class="pricing-card pricing-card--featured reveal">
+              <span class="featured-pill">MOST FLEXIBLE · RECOMMENDED</span>
+              <div class="pricing-card-header">
+                <div class="package-label">02 / GROWTH</div>
+                <h3 class="package-title">Advanced</h3>
+                <div class="package-price-wrap">
+                  <span class="package-price">₹19,999</span>
+                </div>
+                <div class="package-timeline-badge">
+                  <span>⏱ 10–14 days delivery</span>
+                  <span>·</span>
+                  <span>3 revision rounds</span>
+                </div>
+              </div>
+
+              <div class="pricing-divider"></div>
+
+              <ul class="package-features">
+                <li class="package-feature">
+                  <span class="check-icon">✓</span>
+                  <span><strong>8–10 custom responsive pages</strong></span>
+                </li>
+                <li class="package-feature">
+                  <span class="check-icon">✓</span>
+                  <span>Everything included in Standard</span>
+                </li>
+                <li class="package-feature">
+                  <span class="check-icon">✓</span>
+                  <span><strong>Online appointment / table booking system</strong></span>
+                </li>
+                <li class="package-feature">
+                  <span class="check-icon">✓</span>
+                  <span>Local SEO, Google Analytics & Search Console setup</span>
+                </li>
+                <li class="package-feature">
+                  <span class="check-icon">✓</span>
+                  <span>Priority project planning & architecture</span>
+                </li>
+                <li class="package-feature">
+                  <span class="check-icon">✓</span>
+                  <span>Domain + premium hosting first year included</span>
+                </li>
+              </ul>
+
+              <a href="#contact" class="btn-pricing" data-package="Advanced (₹19,999)">Discuss Advanced ↗</a>
+            </article>
+
+            <!-- Card 3: Premium -->
+            <article class="pricing-card reveal">
+              <div class="pricing-card-header">
+                <div class="package-label">03 / SIGNATURE</div>
+                <h3 class="package-title">Premium</h3>
+                <div class="package-price-wrap">
+                  <span class="package-price">₹29,999</span>
+                </div>
+                <div class="package-timeline-badge">
+                  <span>⏱ 14–21 days delivery</span>
+                  <span>·</span>
+                  <span>3 revisions + 30-day support</span>
+                </div>
+              </div>
+
+              <div class="pricing-divider"></div>
+
+              <ul class="package-features">
+                <li class="package-feature">
+                  <span class="check-icon">✓</span>
+                  <span><strong>15+ custom pages or complex store</strong></span>
+                </li>
+                <li class="package-feature">
+                  <span class="check-icon">✓</span>
+                  <span>Everything included in Advanced</span>
+                </li>
+                <li class="package-feature">
+                  <span class="check-icon">✓</span>
+                  <span>Ads tracking, integrated blog & dynamic offers</span>
+                </li>
+                <li class="package-feature">
+                  <span class="check-icon">✓</span>
+                  <span>Review QR code & multi-branch support</span>
+                </li>
+                <li class="package-feature">
+                  <span class="check-icon">✓</span>
+                  <span><strong>30-day post-launch dedicated support</strong></span>
+                </li>
+                <li class="package-feature">
+                  <span class="check-icon">✓</span>
+                  <span>Dedicated video walkthrough & handover plan</span>
+                </li>
+              </ul>
+
+              <a href="#contact" class="btn-pricing" data-package="Premium (₹29,999)">Discuss Premium ↗</a>
+            </article>
+          </div>
+
+          <!-- Technology Price Table -->
+          <div class="tech-pricing-container reveal">
+            <div class="tech-table-header">
+              <h3 class="tech-table-title">Technology Pricing</h3>
+              <p class="tech-table-sub">All prices in INR · Standard / Advanced / Premium tiers</p>
+            </div>
+
+            <div class="table-scroll-hint" aria-hidden="true">
+              <span>← Swipe to view all technologies →</span>
+            </div>
+
+            <div class="table-responsive">
+              <table class="tech-table">
+                <thead>
+                  <tr>
+                    <th>Website Type</th>
+                    <th>Standard</th>
+                    <th>Advanced</th>
+                    <th>Premium</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Business Website</td>
+                    <td>₹14,999</td>
+                    <td>₹19,999</td>
+                    <td>₹29,999</td>
+                  </tr>
+                  <tr>
+                    <td>WordPress Website</td>
+                    <td>₹14,999</td>
+                    <td>₹19,999</td>
+                    <td>₹29,999</td>
+                  </tr>
+                  <tr>
+                    <td>Shopify &amp; Online Stores</td>
+                    <td>₹19,999</td>
+                    <td>₹24,999</td>
+                    <td>₹34,999</td>
+                  </tr>
+                  <tr>
+                    <td>Custom Website</td>
+                    <td>₹39,999</td>
+                    <td>₹49,999</td>
+                    <td>₹74,999</td>
+                  </tr>
+                  <tr>
+                    <td>Real Estate Websites</td>
+                    <td>₹19,999</td>
+                    <td>₹24,999</td>
+                    <td>₹34,999</td>
+                  </tr>
+                  <tr>
+                    <td>Motion / Animation Websites</td>
+                    <td>₹24,999</td>
+                    <td>₹29,999</td>
+                    <td>₹39,999</td>
+                  </tr>
+                  <tr>
+                    <td>3D Websites</td>
+                    <td>₹29,999</td>
+                    <td>₹39,999</td>
+                    <td>₹49,999</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Add-ons Section -->
+          <div class="addons-container reveal">
+            <h3 class="addons-title">
+              <span>✳ Available Scope Extensions &amp; Add-ons</span>
+            </h3>
+            <div class="addons-grid">
+              <div class="addon-card">
+                <span class="addon-name">Domain + hosting renewal (Year 2+)</span>
+                <span class="addon-price">₹3,000–₹8,000 / year</span>
+              </div>
+              <div class="addon-card">
+                <span class="addon-name">Monthly website care &amp; security plan</span>
+                <span class="addon-price">₹1,000–₹3,000 / mo</span>
+              </div>
+              <div class="addon-card">
+                <span class="addon-name">Monthly local SEO + Google Business posts</span>
+                <span class="addon-price">₹3,000–₹8,000 / mo</span>
+              </div>
+              <div class="addon-card">
+                <span class="addon-name">Additional custom page</span>
+                <span class="addon-price">₹1,000–₹2,000 / page</span>
+              </div>
+              <div class="addon-card">
+                <span class="addon-name">Brand logo refresh &amp; vectorization</span>
+                <span class="addon-price">₹2,000–₹5,000</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pricing Footnotes & Terms -->
+          <div class="pricing-notes-box reveal">
+            <p class="pricing-note">
+              <strong>Transparent Agreements:</strong> No hidden assumptions. Scope, timeline, revisions, hosting, and third-party costs are agreed before work begins. Prices are in INR · GST if applicable excluded.
+            </p>
+            <p class="pricing-note">
+              <strong>Payment Terms:</strong> 50% advance to start (Standard) · 40% advance to start (Advanced &amp; Premium) · Balance paid by agreed project milestones.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 10. CONTACT SECTION -->
+      <section class="site-section contact-section" id="contact">
+        <div class="section-shell">
+          <div class="contact-grid">
+            <!-- Left: Contact Narrative -->
+            <div class="contact-info-col reveal">
+              <div>
+                <span class="section-kicker">06 / YOUR TURN</span>
+                <h2 class="contact-headline">Have a good idea? <em>Let's make it real.</em></h2>
+                <p class="contact-desc">
+                  Whether you need a new digital flagship, high-tempo video editing, or elevated campaign imagery, we are ready to listen and execute.
+                </p>
+              </div>
+
+              <!-- Badge Card -->
+              <div class="contact-badge-card">
+                <span class="badge-subhead">Studio Promise</span>
+                <p class="badge-text">Good projects start with a conversation. Let's build something meaningful.</p>
+              </div>
+
+              <!-- Direct Contact Channels -->
+              <div class="contact-direct-links">
+                <a href="mailto:hello@aviron.studio" class="contact-link-row">
+                  <span class="link-dot"></span>
+                  <span>hello@aviron.studio</span>
+                </a>
+                <a href="https://wa.me/91XXXXXXXXXX" target="_blank" rel="noopener noreferrer" class="contact-link-row">
+                  <span class="link-dot"></span>
+                  <span>WhatsApp: +91 XXXXX XXXXX</span>
+                </a>
+                <div class="contact-link-row">
+                  <span class="link-dot"></span>
+                  <span>Based in India · Working with ambitious brands worldwide</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Contact Form -->
+            <div class="contact-form-container reveal">
+              <form class="contact-form" novalidate>
+                <div class="form-group">
+                  <label for="form-name" class="form-label">Your Name *</label>
+                  <input type="text" id="form-name" name="name" class="form-input" placeholder="e.g. Parth Racka" required />
+                </div>
+
+                <div class="form-group">
+                  <label for="form-email" class="form-label">Email Address *</label>
+                  <input type="email" id="form-email" name="email" class="form-input" placeholder="you@company.com" required />
+                </div>
+
+                <div class="form-group">
+                  <label for="form-phone" class="form-label">Phone / WhatsApp</label>
+                  <input type="tel" id="form-phone" name="phone" class="form-input" placeholder="+91 98765 43210" />
+                </div>
+
+                <div class="form-group">
+                  <label for="form-service" class="form-label">Service Required</label>
+                  <select id="form-service" name="service" class="form-select">
+                    <option value="Website Development">Website Development</option>
+                    <option value="Video Editing">Video Editing</option>
+                    <option value="Photo Editing">Photo Editing</option>
+                    <option value="Full Studio Retainer">Full Studio Retainer</option>
+                  </select>
+                </div>
+
+                <div class="form-group full-width">
+                  <label for="form-package" class="form-label">Interested Package</label>
+                  <select id="form-package" name="package" class="form-select">
+                    <option value="Not Sure / Custom Scope">Not Sure / Custom Scope</option>
+                    <option value="Standard (₹14,999)">Standard (₹14,999)</option>
+                    <option value="Advanced (₹19,999)" selected>Advanced (₹19,999) — Recommended</option>
+                    <option value="Premium (₹29,999)">Premium (₹29,999)</option>
+                  </select>
+                </div>
+
+                <div class="form-group full-width">
+                  <label for="form-message" class="form-label">Project Details *</label>
+                  <textarea id="form-message" name="message" class="form-textarea" placeholder="Tell us about your brand, timeline, and what you aim to achieve..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">
+                  <span>Send Project Enquiry ↗</span>
+                </button>
+
+                <!-- Status Feedback Message -->
+                <div class="form-feedback" role="alert" aria-live="polite"></div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- 11. FOOTER -->
+    <footer class="site-footer">
+      <div class="section-shell">
+        <div class="footer-top">
+          <!-- Col 1: Brand -->
+          <div class="footer-brand-col">
+            <span class="footer-brand-title">AVIRON · DIGITAL STUDIO</span>
+            <p class="footer-tagline">Thoughtfully crafted. Intentionally different.</p>
+            <p class="footer-desc" style="font-size: 13px; color: var(--muted); max-width: 320px;">
+              We partner with forward-thinking businesses to build enduring digital impressions across websites, video, and image craft.
+            </p>
+          </div>
+
+          <!-- Col 2: Navigation -->
+          <div class="footer-nav-col">
+            <span class="footer-col-title">Navigation</span>
+            <a href="#hero" class="footer-link">Home</a>
+            <a href="#about" class="footer-link">About Studio</a>
+            <a href="#services" class="footer-link">Services</a>
+            <a href="#work" class="footer-link">Selected Work</a>
+            <a href="#process" class="footer-link">The Process</a>
+            <a href="#pricing" class="footer-link">Packages &amp; Pricing</a>
+          </div>
+
+          <!-- Col 3: Direct Contact & Action -->
+          <div class="footer-action-col">
+            <span class="footer-col-title">Direct Inquiries</span>
+            <a href="mailto:hello@aviron.studio" class="footer-link">hello@aviron.studio</a>
+            <a href="https://wa.me/91XXXXXXXXXX" class="footer-link">WhatsApp Inquiries ↗</a>
+            <button class="btn-back-top" type="button" aria-label="Back to top of page">
+              <span>Back to top ↑</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <span>&copy; 2026 AVIRON Studio. All rights reserved.</span>
+          <span class="footer-badge">DESIGNED WITH INTENTION ✳</span>
+          <span>Website · Motion · Image</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Main ES Module Script (imports three-scene, scroll, interactions, form) -->
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

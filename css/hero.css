@@ -1,0 +1,496 @@
+/**
+ * AVIRON DIGITAL STUDIO - Hero & Marquee Styles
+ * Refined Luxury-Minimalist Hero Stage & Dynamic Marquee Strip
+ */
+
+/* ----------------------------------------------------
+   3. HERO SECTION
+   ---------------------------------------------------- */
+.hero-section {
+  position: relative;
+  min-height: calc(100vh - var(--header-height) - var(--announcement-height));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: clamp(40px, 6vw, 76px);
+  padding-bottom: clamp(60px, 8vw, 90px);
+  overflow: hidden;
+}
+
+/* Subtle ambient illumination behind the 3D stage area */
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 15%;
+  transform: translate(20%, -50%);
+  width: clamp(380px, 50vw, 720px);
+  height: clamp(380px, 50vw, 720px);
+  background: radial-gradient(circle, rgba(196, 169, 106, 0.07) 0%, rgba(143, 168, 216, 0.02) 40%, transparent 70%);
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ----------------------------------------------------
+   HERO SHELL - LUXURY MINIMAL SPLIT COMPOSITION
+   ---------------------------------------------------- */
+.hero-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1.18fr) minmax(0, 0.82fr);
+  align-items: center;
+  gap: clamp(32px, 5vw, 64px);
+  width: 100%;
+  position: relative;
+  z-index: 3;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  max-width: 660px;
+  position: relative;
+  z-index: 4;
+}
+
+.hero-stage-spacer {
+  min-height: 440px;
+  width: 100%;
+  pointer-events: none;
+}
+
+/* ----------------------------------------------------
+   SUBTLE UNDERSTATED EYEBROW
+   ---------------------------------------------------- */
+.hero-eyebrow-wrap {
+  margin-bottom: clamp(18px, 2.8vw, 28px);
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-heading);
+  font-size: clamp(10px, 0.9vw, 11.5px);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: rgba(14, 18, 12, 0.65);
+  border: 1px solid var(--line);
+  padding: 8px 22px;
+  border-radius: var(--radius-pill);
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+  transition: border-color var(--duration-fast) ease, box-shadow var(--duration-fast) ease, color var(--duration-fast) ease, transform 0.25s var(--ease-out-expo);
+  cursor: default;
+}
+
+.hero-eyebrow:hover {
+  border-color: var(--gold-hover);
+  color: var(--ink);
+  box-shadow: 0 0 24px rgba(196, 169, 106, 0.25);
+  transform: translateY(-1px);
+}
+
+/* ----------------------------------------------------
+   MONUMENTAL HEADLINE
+   ---------------------------------------------------- */
+.hero-title {
+  font-family: var(--font-heading);
+  font-size: clamp(36px, 4.8vw, 74px);
+  line-height: 1.08;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  text-align: left;
+  color: var(--ink);
+  margin: 0 0 clamp(20px, 2.6vw, 30px) 0;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.9), 0 0 50px rgba(8, 11, 8, 0.85);
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+.hero-title .title-line {
+  display: block;
+  padding-bottom: 0.08em;
+}
+
+.hero-title .title-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.hero-title .char {
+  display: inline-block;
+  will-change: transform, opacity;
+  cursor: default;
+  transition: transform 0.2s ease;
+}
+
+.hero-title em,
+.hero-title .title-highlight {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #d8bd7e; /* Guaranteed fallback: never invisible */
+  background: linear-gradient(135deg, #fff5e0 0%, #d8bd7e 42%, #c4a96a 72%, #a07f3c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  padding: 0.04em 0.16em 0.12em 0.04em;
+  margin-bottom: -0.12em;
+  vertical-align: baseline;
+  filter: drop-shadow(0 2px 24px rgba(196, 169, 106, 0.45));
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.hero-title em:hover,
+.hero-title .title-highlight:hover {
+  filter: drop-shadow(0 4px 32px rgba(216, 189, 126, 0.7));
+}
+
+.hero-title .title-highlight .char {
+  display: inline;
+  -webkit-background-clip: inherit;
+  -webkit-text-fill-color: inherit;
+}
+
+/* ----------------------------------------------------
+   REFINED CONCISE LEDE
+   ---------------------------------------------------- */
+.hero-lede {
+  font-family: var(--font-body);
+  font-size: clamp(15px, 1.25vw, 18px);
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 520px;
+  margin: 0 0 clamp(28px, 3.8vw, 40px) 0;
+  text-align: left;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.95);
+}
+
+/* ----------------------------------------------------
+   CLEAN MINIMAL CALL-TO-ACTION BUTTONS
+   ---------------------------------------------------- */
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: linear-gradient(135deg, #d8bd7e 0%, #c4a96a 50%, #b39755 100%);
+  padding: 14px 30px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 0 4px 24px var(--gold-glow), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  transition: transform var(--duration-fast) var(--ease-out-expo), box-shadow var(--duration-fast) ease, background var(--duration-fast) ease;
+  will-change: transform;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #e6ce94 0%, #d8bd7e 50%, #c4a96a 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 36px var(--gold-glow-intense), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.btn-arrow {
+  display: inline-block;
+  transition: transform 0.25s var(--ease-out-expo);
+}
+
+.btn-primary:hover .btn-arrow {
+  transform: translate(3px, 3px);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+  padding: 14px 28px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--line);
+  background: rgba(14, 18, 12, 0.52);
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+  transition: color var(--duration-fast) ease, border-color var(--duration-fast) ease, background var(--duration-fast) ease, transform var(--duration-fast) var(--ease-out-expo), box-shadow var(--duration-fast) ease;
+  text-decoration: none;
+  will-change: transform;
+}
+
+.btn-secondary:hover {
+  color: var(--gold);
+  border-color: var(--gold);
+  background: var(--gold-light);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 24px rgba(196, 169, 106, 0.18);
+}
+
+.btn-secondary:hover .btn-arrow {
+  transform: translate(2px, -2px);
+}
+
+/* Action link utility for secondary interactions */
+.btn-link-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  padding: 13px 22px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--line);
+  background: rgba(14, 18, 12, 0.45);
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+  transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+  text-decoration: none;
+}
+
+.btn-link-action:hover {
+  color: var(--gold);
+  border-color: var(--gold);
+  background: var(--gold-light);
+  transform: translateX(3px);
+}
+
+.link-arrow {
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+
+.btn-link-action:hover .link-arrow {
+  transform: translateX(3px);
+}
+
+/* ----------------------------------------------------
+   QUIET MINIMAL SCROLL INDICATOR
+   ---------------------------------------------------- */
+.hero-scroll-indicator {
+  position: absolute;
+  bottom: clamp(20px, 3.2vw, 36px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color var(--duration-fast) ease, border-color var(--duration-fast) ease, transform var(--duration-fast) ease;
+  cursor: pointer;
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  background: rgba(14, 18, 12, 0.45);
+  border: 1px solid rgba(196, 169, 106, 0.15);
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+  z-index: 5;
+}
+
+.hero-scroll-indicator:hover {
+  color: var(--gold);
+  border-color: var(--gold);
+  transform: translateX(-50%) translateY(2px);
+}
+
+.scroll-indicator-arrow {
+  font-size: 12px;
+  color: var(--gold);
+  display: inline-block;
+  animation: scrollArrowBounce 2.2s ease-in-out infinite;
+}
+
+@keyframes scrollArrowBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(3px); }
+}
+
+/* ----------------------------------------------------
+   4. MARQUEE STRIP
+   ---------------------------------------------------- */
+.marquee-section {
+  position: relative;
+  z-index: var(--z-content);
+  background: var(--gold-light);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 18px 0;
+  overflow: hidden;
+  user-select: none;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: marquee-scroll 35s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+.marquee-item {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding-right: 28px;
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.marquee-star {
+  color: var(--gold);
+  font-size: 14px;
+  display: inline-block;
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ----------------------------------------------------
+   RESPONSIVE DESIGN
+   ---------------------------------------------------- */
+@media (max-width: 991px) {
+  .hero-section {
+    padding-top: clamp(24px, 5vw, 44px);
+    padding-bottom: clamp(56px, 8vw, 84px);
+    min-height: auto;
+  }
+
+  .hero-section::before {
+    right: 50%;
+    transform: translate(50%, -50%);
+    width: 300px;
+    height: 300px;
+  }
+
+  .hero-shell {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 24px;
+  }
+
+  .hero-content {
+    align-items: center;
+    text-align: center;
+    margin: 0 auto;
+    max-width: 720px;
+  }
+
+  .hero-eyebrow-wrap {
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .hero-title {
+    text-align: center;
+    font-size: clamp(30px, 6.8vw, 54px);
+    line-height: 1.12;
+  }
+
+  .hero-title .title-line {
+    white-space: normal;
+  }
+
+  .hero-lede {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 580px;
+    font-size: clamp(14.5px, 3.5vw, 17px);
+    line-height: 1.65;
+    margin-bottom: 32px;
+  }
+
+  .hero-actions {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .hero-stage-spacer {
+    display: none;
+  }
+}
+
+@media (max-width: 540px) {
+  .hero-section {
+    padding-top: 18px;
+    padding-bottom: 60px;
+  }
+
+  .hero-eyebrow {
+    font-size: 9px;
+    padding: 6px 14px;
+    letter-spacing: 0.14em;
+  }
+
+  .hero-title {
+    font-size: clamp(30px, 8.5vw, 42px);
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+  }
+
+  .hero-lede {
+    font-size: 14.5px;
+    line-height: 1.6;
+    padding: 0 4px;
+    margin-bottom: 26px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .btn-primary, .btn-secondary {
+    width: 100%;
+    min-height: 48px;
+    justify-content: center;
+  }
+}

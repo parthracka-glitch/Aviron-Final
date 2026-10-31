@@ -1,0 +1,196 @@
+/**
+ * AVIRON DIGITAL STUDIO - Animation Styles
+ * Transitions, keyframes, scroll reveals, and reduced motion safeguards
+ */
+
+/* ----------------------------------------------------
+   GSAP REVEAL PRIMITIVES
+   Elements that GSAP will target and reveal on scroll
+   ---------------------------------------------------- */
+.reveal {
+  opacity: 1; /* Fallback if JS fails */
+  will-change: transform, opacity;
+}
+
+/* When JS is active, initial state for non-GSAP CSS fallbacks */
+.js-loaded .reveal {
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity 0.85s var(--ease-out-expo), transform 0.85s var(--ease-out-expo);
+}
+
+.js-loaded .reveal.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delay classes for CSS fallback */
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ----------------------------------------------------
+   KEYFRAME ANIMATIONS
+   ---------------------------------------------------- */
+@keyframes goldGlowPulse {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(196, 169, 106, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(196, 169, 106, 0.45);
+  }
+}
+
+@keyframes subtleFloat {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes slowOrbit {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes lineDrawIn {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Micro-interaction classes */
+.interactive-hover-glow:hover {
+  animation: goldGlowPulse 2.4s infinite ease-in-out;
+}
+
+.subtle-floating {
+  animation: subtleFloat 3.8s ease-in-out infinite alternate;
+}
+
+/* Fluid Button Ripple Micro-interaction */
+.btn-ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, rgba(196, 169, 106, 0.25) 50%, transparent 80%);
+  animation: buttonRipple 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  pointer-events: none;
+  z-index: 5;
+}
+
+@keyframes buttonRipple {
+  0% {
+    width: 20px;
+    height: 20px;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0.9;
+  }
+  100% {
+    width: 140px;
+    height: 140px;
+    transform: translate(-50%, -50%) scale(2.8);
+    opacity: 0;
+  }
+}
+
+/* Shimmer Sweep Accent */
+.shine-sweep {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine-sweep::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 70%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.8s var(--ease-out-expo);
+  pointer-events: none;
+}
+
+.shine-sweep:hover::after {
+  left: 150%;
+}
+
+/* ----------------------------------------------------
+   LENIS SMOOTH SCROLL INTEGRATION
+   ---------------------------------------------------- */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* ----------------------------------------------------
+   ACCESSIBILITY: PREFERS REDUCED MOTION
+   ---------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .preloader {
+    display: none !important;
+  }
+
+  #webgl-canvas {
+    display: none !important;
+  }
+
+  .cursor-dot,
+  .cursor-ring {
+    display: none !important;
+  }
+
+  .marquee-track {
+    animation: none !important;
+  }
+
+  .stamp-svg {
+    animation: none !important;
+  }
+
+  .floating-intention-note {
+    animation: none !important;
+  }
+
+  .announcement-dot {
+    animation: none !important;
+  }
+
+  .reveal,
+  .js-loaded .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .work-track {
+    transform: none !important;
+  }
+}
