@@ -216,16 +216,16 @@ export function initThreeScene() {
   // - Footer: foundation depth beneath the footer
   const WAYPOINT_DEFS = [
     { id: '#hero',        role: 'single', x:  2.20, y:  0.00, s: 1.35, rotX:  0.08, rotY:  0.20, rotZ: -0.04, camZ: 8.8 },
-    { id: '#about',       role: 'single', x:  2.55, y: -0.06, s: 1.25, rotX: -0.12, rotY: -0.30, rotZ:  0.05, camZ: 8.6 },
-    { id: '#services',    role: 'single', x: -2.35, y: -0.05, s: 1.30, rotX:  0.18, rotY:  0.42, rotZ: -0.05, camZ: 8.5 },
+    { id: '#about',       role: 'single', x:  2.55, y: -0.06, s: 1.15, rotX: -0.12, rotY: -0.30, rotZ:  0.05, camZ: 8.8 },
+    { id: '#services',    role: 'single', x:  2.45, y: -0.05, s: 1.15, rotX:  0.18, rotY:  0.42, rotZ: -0.05, camZ: 8.8 },
     { id: '#work',        role: 'span',
-      startPose: { x:  0.35, y:  0.05, s: 1.55, rotX:  0.05, rotY:  0.30, rotZ:  0.02, camZ: 8.2 },
-      endPose:   { x: -0.35, y:  0.05, s: 1.60, rotX:  0.08, rotY:  0.65, rotZ: -0.02, camZ: 8.1 }
+      startPose: { x:  0.35, y:  0.05, s: 1.15, rotX:  0.05, rotY:  0.30, rotZ:  0.02, camZ: 9.0 },
+      endPose:   { x: -0.35, y:  0.05, s: 1.15, rotX:  0.08, rotY:  0.65, rotZ: -0.02, camZ: 9.0 }
     },
-    { id: '#process',     role: 'single', x:  2.25, y:  0.00, s: 1.25, rotX:  0.20, rotY: -0.25, rotZ:  0.06, camZ: 8.4 },
-    { id: '#pricing',     role: 'single', x: -2.30, y:  0.05, s: 1.30, rotX: -0.12, rotY:  0.38, rotZ: -0.05, camZ: 8.4 },
-    { id: '#contact',     role: 'single', x:  0.00, y: -0.70, s: 1.25, rotX:  0.25, rotY:  0.10, rotZ:  0.00, camZ: 8.8 },
-    { id: '.site-footer', role: 'single', x:  0.00, y: -0.35, s: 1.65, rotX:  0.30, rotY:  0.15, rotZ:  0.00, camZ: 8.2 }
+    { id: '#process',     role: 'single', x:  2.45, y:  0.00, s: 1.15, rotX:  0.20, rotY: -0.25, rotZ:  0.06, camZ: 8.8 },
+    { id: '#pricing',     role: 'single', x: -2.40, y:  0.05, s: 1.15, rotX: -0.12, rotY:  0.38, rotZ: -0.05, camZ: 8.8 },
+    { id: '#contact',     role: 'single', x:  0.00, y: -0.55, s: 1.10, rotX:  0.25, rotY:  0.10, rotZ:  0.00, camZ: 9.0 },
+    { id: '.site-footer', role: 'single', x:  0.00, y: -0.30, s: 1.30, rotX:  0.30, rotY:  0.15, rotZ:  0.00, camZ: 8.8 }
   ];
 
   function adjustPoseForViewport(pose) {
@@ -236,16 +236,16 @@ export function initThreeScene() {
     if (width < 768) {
       // Mobile screens: strictly horizontally centered (x: 0),
       // dynamic camZ and scale guarantee that all 3 orbital rings and orbiting satellites NEVER clip off-screen
-      const targetOuterRadius = 3.90 * 0.72; // outer ring 3 (3.85) scaled + satellites
+      const targetOuterRadius = 3.90 * 0.65;
       const safeMargin = 1.08; // 8% edge breathing room
       const tanHalfFov = Math.tan(THREE.MathUtils.degToRad(22.5));
       const neededCamZ = (targetOuterRadius * safeMargin) / (tanHalfFov * Math.max(aspect, 0.35));
-      const mobileCamZ = Math.min(Math.max(neededCamZ, 11.5), 18.0);
+      const mobileCamZ = Math.min(Math.max(neededCamZ, 12.0), 18.0);
 
       return {
         x: 0,
-        y: pose.y * 0.35,
-        s: 0.72,
+        y: pose.y * 0.25,
+        s: 0.65,
         rotX: pose.rotX * 0.75,
         rotY: pose.rotY * 0.75,
         rotZ: (pose.rotZ || 0) * 0.50,
@@ -256,9 +256,9 @@ export function initThreeScene() {
     if (width < 992) {
       // Tablet screens: gentle centering and scaled so outer rings stay within viewport bounds
       return {
-        x: pose.x * 0.12,
-        y: pose.y * 0.55,
-        s: Math.min(pose.s * 0.65, 0.88),
+        x: pose.x * 0.22,
+        y: pose.y * 0.50,
+        s: Math.min(pose.s * 0.72, 0.88),
         rotX: pose.rotX * 0.80,
         rotY: pose.rotY * 0.80,
         rotZ: (pose.rotZ || 0) * 0.60,
@@ -587,6 +587,26 @@ export function initThreeScene() {
 
     // Camera dynamic Z drift smoothly follows interpolated waypoint camZ
     camera.position.z = currentPose.camZ;
+
+    // Smoothly fade canvas opacity past hero section for an ethereal, non-intrusive background effect
+    const heroEl = document.getElementById('hero');
+    const heroBottom = heroEl ? (heroEl.offsetTop + heroEl.offsetHeight) : window.innerHeight;
+    const scrollYCurrent = window.scrollY || window.pageYOffset || 0;
+    
+    // In hero: 1.0 desktop / 0.85 mobile. As you scroll past hero: fades smoothly to 0.38 desktop / 0.30 mobile
+    let targetCanvasOpacity = 1.0;
+    if (scrollYCurrent <= heroBottom * 0.3) {
+      targetCanvasOpacity = 1.0;
+    } else if (scrollYCurrent >= heroBottom * 1.1) {
+      targetCanvasOpacity = 0.38;
+    } else {
+      const t = (scrollYCurrent - heroBottom * 0.3) / (heroBottom * 0.8);
+      targetCanvasOpacity = 1.0 - t * 0.62;
+    }
+    if (window.innerWidth < 768) {
+      targetCanvasOpacity *= 0.82;
+    }
+    canvas.style.opacity = targetCanvasOpacity.toFixed(3);
 
     renderer.render(scene, camera);
   }
