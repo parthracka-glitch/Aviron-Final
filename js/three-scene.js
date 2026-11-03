@@ -220,9 +220,9 @@ export function initThreeScene() {
     { id: '#services',    role: 'single', x:  2.45, y: -0.05, s: 1.15, rotX:  0.18, rotY:  0.42, rotZ: -0.05, camZ: 8.8 },
     { id: '#work',        role: 'span',
       startPose: { x:  0.35, y:  0.05, s: 1.15, rotX:  0.05, rotY:  0.30, rotZ:  0.02, camZ: 9.0 },
-      endPose:   { x: -0.35, y:  0.05, s: 1.15, rotX:  0.08, rotY:  0.65, rotZ: -0.02, camZ: 9.0 }
+      endPose:   { x:  0.85, y:  0.05, s: 1.08, rotX:  0.08, rotY:  0.65, rotZ: -0.02, camZ: 9.2 }
     },
-    { id: '#process',     role: 'single', x:  2.45, y:  0.00, s: 1.15, rotX:  0.20, rotY: -0.25, rotZ:  0.06, camZ: 8.8 },
+    { id: '#process',     role: 'single', x:  2.85, y: -0.05, s: 1.05, rotX:  0.20, rotY: -0.25, rotZ:  0.06, camZ: 9.5 },
     { id: '#pricing',     role: 'single', x: -2.40, y:  0.05, s: 1.15, rotX: -0.12, rotY:  0.38, rotZ: -0.05, camZ: 8.8 },
     { id: '#contact',     role: 'single', x:  0.00, y: -0.55, s: 1.10, rotX:  0.25, rotY:  0.10, rotZ:  0.00, camZ: 9.0 },
     { id: '.site-footer', role: 'single', x:  0.00, y: -0.30, s: 1.30, rotX:  0.30, rotY:  0.15, rotZ:  0.00, camZ: 8.8 }
