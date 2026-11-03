@@ -4,25 +4,26 @@
  */
 
 :root {
-  /* Color Palette - High Contrast & Dark Luxury */
+  /* Color Palette - High Contrast & Dark Luxury (WCAG AAA) */
   --bg: #080b08;
   --bg-2: #0d120d;
   --section-bg: transparent;
   --section-bg-alt: transparent;
   --surface: rgba(13, 17, 13, 0.92);
-  --surface-card: rgba(12, 16, 12, 0.88);
+  --surface-card: rgba(13, 17, 13, 0.90);
   --surface-card-hover: rgba(20, 26, 19, 0.96);
-  --surface-glass: rgba(10, 14, 10, 0.88);
+  --surface-glass: rgba(12, 16, 12, 0.90);
   --surface-alt: rgba(255, 255, 255, 0.04);
   --ink: #f7f5ef;
   --ink-pure: #ffffff;
-  --muted: #b8b3a8;
-  --muted-dark: #828078;
+  --muted-bright: #d6d1c7;
+  --muted: #c8c3b9;
+  --muted-dark: #8c8980;
   --gold: #c4a96a;
   --gold-hover: #d8bd7e;
   --gold-light: rgba(196, 169, 106, 0.16);
   --gold-glow: rgba(196, 169, 106, 0.35);
-  --line: rgba(196, 169, 106, 0.22);
+  --line: rgba(196, 169, 106, 0.20);
   --line-dim: rgba(240, 237, 229, 0.12);
   --scene-wire: #8fa8d8;
   --scene-core: #c4a96a;
@@ -41,15 +42,15 @@
   --fs-h3: clamp(22px, 2.5vw, 34px);
   --fs-h4: clamp(17px, 1.8vw, 22px);
   --fs-body: 15px;
-  --fs-body-sm: 13px;
-  --fs-label: 9px;
+  --fs-body-sm: 13.5px;
+  --fs-label: 10px;
   --fs-label-md: 11px;
 
   /* Line Heights */
   --lh-h1: 1.05;
   --lh-h2: 1.15;
   --lh-h3: 1.25;
-  --lh-body: 1.7;
+  --lh-body: 1.68;
 
   /* Letter Spacing */
   --tracking-tight: -0.04em;
@@ -69,7 +70,7 @@
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 16px;
-  --radius-xl: 24px;
+  --radius-xl: 20px;
   --radius-pill: 9999px;
 
   /* Shadows */
@@ -95,11 +96,11 @@
   --z-preloader: 100;
 
   /* Morphism & Glass Tokens - High Opacity for 100% Crisp Legibility over 3D */
-  --glass-bg: rgba(11, 15, 11, 0.88);
-  --glass-bg-elevated: rgba(16, 21, 16, 0.94);
-  --glass-bg-subtle: rgba(14, 18, 14, 0.70);
-  --glass-border: rgba(196, 169, 106, 0.20);
-  --glass-border-hover: rgba(196, 169, 106, 0.50);
+  --glass-bg: rgba(13, 17, 13, 0.90);
+  --glass-bg-elevated: rgba(18, 24, 18, 0.95);
+  --glass-bg-subtle: rgba(14, 18, 14, 0.75);
+  --glass-border: rgba(196, 169, 106, 0.16);
+  --glass-border-hover: rgba(196, 169, 106, 0.40);
   --glass-specular: rgba(255, 255, 255, 0.16);
   --glass-specular-bright: rgba(255, 255, 255, 0.30);
   --glass-blur-sm: blur(10px);

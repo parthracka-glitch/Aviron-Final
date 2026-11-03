@@ -213,9 +213,10 @@ body::before {
 /* Typography Defaults */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-  color: var(--ink);
+  color: var(--ink-pure);
   font-weight: 700;
   margin-bottom: 0.5rem;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.75);
 }
 
 h1 {
@@ -258,7 +259,7 @@ h4 em,
 
 p {
   margin-bottom: 1.25rem;
-  color: var(--muted);
+  color: var(--muted-bright);
 }
 
 p:last-child {

@@ -98,35 +98,54 @@
   to { transform: rotate(360deg); }
 }
 
-/* About Philosophy Strip - Elevated Glass Capsule for Maximum Text Clarity */
+/* About Philosophy Strip - 3 Distinct Independent Cards matching user reference */
 .about-pillars {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
-  margin-top: 48px;
-  padding: 32px 28px;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-xl);
-  backdrop-filter: var(--glass-blur-md);
-  -webkit-backdrop-filter: var(--glass-blur-md);
-  box-shadow: var(--glass-shadow);
+  margin-top: 56px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  box-shadow: none;
 }
 
 .pillar-item {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 18px 16px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  border-radius: var(--radius-md);
-  transition: border-color var(--duration-fast) ease, background var(--duration-fast) ease;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  padding: clamp(28px, 3.2vw, 38px);
+  backdrop-filter: var(--glass-blur-md);
+  -webkit-backdrop-filter: var(--glass-blur-md);
+  box-shadow: var(--glass-shadow);
+  transition: transform var(--duration-fast) var(--ease-out-expo),
+              border-color var(--duration-fast) ease,
+              box-shadow var(--duration-fast) ease;
+  overflow: hidden;
+}
+
+.pillar-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(350px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(196, 169, 106, 0.12), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
 }
 
 .pillar-item:hover {
-  background: rgba(196, 169, 106, 0.04);
-  border-color: rgba(196, 169, 106, 0.25);
+  transform: translateY(-4px);
+  border-color: var(--glass-border-hover);
+  box-shadow: var(--glass-shadow-hover);
+}
+
+.pillar-item:hover::before {
+  opacity: 1;
 }
 
 .pillar-num {
@@ -134,21 +153,26 @@
   font-size: var(--fs-label);
   font-weight: 700;
   letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
   color: var(--gold);
+  margin-bottom: 14px;
 }
 
 .pillar-title {
   font-family: var(--font-heading);
-  font-size: 18px;
+  font-size: clamp(20px, 1.8vw, 24px);
   font-weight: 700;
-  color: var(--ink);
-  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.8);
+  color: var(--ink-pure);
+  line-height: 1.25;
+  margin-bottom: 16px;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.85);
 }
 
 .pillar-desc {
-  font-size: 14px;
-  line-height: 1.65;
-  color: var(--muted);
+  font-size: 14.5px;
+  line-height: 1.68;
+  color: var(--muted-bright);
+  margin-bottom: 0;
 }
 
 /* ----------------------------------------------------
@@ -240,14 +264,14 @@
   font-family: var(--font-heading);
   font-size: clamp(22px, 2.2vw, 28px);
   font-weight: 700;
-  color: var(--ink);
+  color: var(--ink-pure);
   line-height: 1.2;
 }
 
 .service-desc {
-  font-size: 14px;
-  line-height: 1.65;
-  color: var(--muted);
+  font-size: 14.5px;
+  line-height: 1.68;
+  color: var(--muted-bright);
   margin-bottom: 20px;
 }
 
@@ -286,8 +310,8 @@
   align-items: center;
   gap: 10px;
   font-size: 13px;
-  color: var(--ink);
-  opacity: 0.85;
+  color: var(--ink-pure);
+  font-weight: 500;
 }
 
 .feature-dot {
@@ -442,7 +466,7 @@
   font-family: var(--font-heading);
   font-size: clamp(20px, 2vw, 24px);
   font-weight: 700;
-  color: var(--ink);
+  color: var(--ink-pure);
 }
 
 .work-arrow {
@@ -611,14 +635,14 @@
   font-family: var(--font-heading);
   font-size: 22px;
   font-weight: 700;
-  color: var(--ink);
+  color: var(--ink-pure);
   line-height: 1.2;
 }
 
 .process-step-desc {
-  font-size: 14px;
+  font-size: 14.5px;
   line-height: 1.7;
-  color: var(--muted);
+  color: var(--muted-bright);
 }
 
 /* ----------------------------------------------------
@@ -724,7 +748,7 @@
   font-family: var(--font-heading);
   font-size: 28px;
   font-weight: 800;
-  color: var(--ink);
+  color: var(--ink-pure);
   margin-bottom: 12px;
 }
 
@@ -739,7 +763,7 @@
   font-family: var(--font-heading);
   font-size: 38px;
   font-weight: 800;
-  color: var(--ink);
+  color: var(--ink-pure);
   letter-spacing: -0.03em;
 }
 
@@ -775,8 +799,7 @@
   align-items: flex-start;
   gap: 10px;
   font-size: 14px;
-  color: var(--ink);
-  opacity: 0.9;
+  color: var(--ink-pure);
 }
 
 .check-icon {
@@ -1341,7 +1364,7 @@
   .about-pillars {
     grid-template-columns: 1fr;
     gap: 16px;
-    padding: 24px 20px;
+    padding: 0;
     margin-top: 36px;
   }
 
